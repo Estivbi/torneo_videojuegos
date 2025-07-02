@@ -2,7 +2,7 @@
 
 **Autor:**  
 Carolina Rodríguez  
-Curso: Proyecto Final Python
+Curso: Proyecto Final Python - Propuesta C
 
 ![Foto del autor](coloca_aquí_tu_foto.jpg) <!-- Puedes cambiar por un link externo si lo subes a GitHub -->
 
