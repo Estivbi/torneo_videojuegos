@@ -1,6 +1,46 @@
-{% extends "base.html" %}
-{% block title %}Inicio{% endblock %}
+{% extends 'base.html' %}
 {% block content %}
-<h1 class="text-center">Bienvenido al Torneo de Videojuegos</h1>
-<p class="text-center">¡Comienza a organizar tu torneo!</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="bg-secondary p-4 rounded mb-4">
+                <h1 class="display-5 text-info"><i class="bi bi-trophy"></i> ¡Bienvenido al Torneo de Videojuegos!</h1>
+                <p class="lead text-light">Participa, compite y demuestra tus habilidades en los mejores videojuegos.</p>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title text-info">¿Cómo funciona?</h3>
+                    <ul class="text-muted">
+                        <li>Regístrate y crea tu equipo.</li>
+                        <li>Consulta el calendario de torneos.</li>
+                        <li>Compite y gana premios.</li>
+                    </ul>
+                    <a class="btn btn-success btn-lg mt-3" href="/registrar-torneo" role="button">
+                        <i class="bi bi-plus-circle"></i> Registrar Torneo
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark text-light mb-4">
+                <div class="card-header text-warning">
+                    <i class="bi bi-calendar-event"></i> Próximos torneos
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-dark text-light">FIFA 24 <span class="badge bg-info">15 de junio</span></li>
+                    <li class="list-group-item bg-dark text-light">League of Legends <span class="badge bg-info">22 de junio</span></li>
+                    <li class="list-group-item bg-dark text-light">Super Smash Bros <span class="badge bg-info">29 de junio</span></li>
+                </ul>
+            </div>
+            <div class="card bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">Sobre el torneo</h5>
+                    <p class="card-text text-light">Organizamos competiciones para gamers de todos los niveles. ¡Únete y vive la experiencia!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 {% endblock %}
