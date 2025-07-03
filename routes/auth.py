@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from models import get_db
 
 auth = Blueprint('auth', __name__)
 
@@ -32,6 +33,31 @@ def register():
             password_error = 'La contraseña debe tener al menos 8 caracteres.'
         else:
             password_valid = True
+
+    # Si todo es válido, guardar en la base de datos
+    if email_valid and username_valid and password_valid:
+        db = get_db()
+        # Verifica si el email o username ya existen
+        user = db.execute(
+            'SELECT id, username, email FROM users WHERE username = ? OR email = ?',
+            (username, email)
+        ).fetchone()
+        if user:
+            if user and user['username'] == username:
+                username_error = 'El nombre de usuario ya está registrado.'
+            if user and user['email'] == email:
+                email_error = 'El correo ya está registrado.'
+        else:
+            try:
+                db.execute(
+                    'INSERT INTO users (email, username, password) VALUES (?, ?, ?)',
+                    (email, username, password)
+                )
+                db.commit()
+                flash('Registro exitoso. Ahora puedes iniciar sesión.', 'success')
+                return redirect(url_for('auth.login'))
+            except Exception as e:
+                email_error = f'Error al registrar: {str(e)}'
 
     return render_template(
         'register.html',

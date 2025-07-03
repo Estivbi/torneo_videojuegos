@@ -22,7 +22,7 @@ def create_user_table():
 def add_user(username, password, is_admin=0):
     db = get_db()
     db.execute(
-        'INSERT INTO users (email, username, password, is_admin) VALUES (?, ?, ?)',
+        'INSERT INTO users (email, username, password, is_admin) VALUES (?, ?, ?, ?)',
         (email, username, generate_password_hash(password), is_admin)
     )
     db.commit()
