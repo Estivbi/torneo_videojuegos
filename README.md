@@ -6,6 +6,14 @@ Curso: Proyecto Final Python - Propuesta C
 
 ![Foto del autor](coloca_aquí_tu_foto.jpg) <!-- Puedes cambiar por un link externo si lo subes a GitHub -->
 
+![Captura 1](https://github.com/user-attachments/assets/a235c546-d5a2-404f-b5d5-665aa9acc569)
+
+![Captura 2](https://github.com/user-attachments/assets/c0a0ab9d-1c84-4a53-bdb4-164322811b71)
+
+![Captura 3](https://github.com/user-attachments/assets/dfc0d552-fbd7-4f27-9842-f8f6018c864d)
+
+![Captura 4](https://github.com/user-attachments/assets/7afe58c9-57bf-4308-92ac-f62e5bc98c48)
+
 ---
 
 ## 📑 Índice
