@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="mb-4">Bienvenido a tu Dashboard</h2>
 
-</body>
-</html>
+<!-- Tabs/Pills -->
+<ul class="nav nav-pills mb-3" id="dashboard-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="stats-tab" data-bs-toggle="pill" data-bs-target="#stats" type="button" role="tab">Estadísticas</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="games-tab" data-bs-toggle="pill" data-bs-target="#games" type="button" role="tab">Mis Juegos</button>
+  </li>
+</ul>
+<div class="tab-content" id="dashboard-tabs-content">
+  <!-- Estadísticas -->
+  <div class="tab-pane fade show active" id="stats" role="tabpanel">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-bg-dark mb-3">
+          <div class="card-header">Partidas Jugadas</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ stats.games_played or 0 }}</h5>
+            <p class="card-text">Total de partidas en las que has participado.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-bg-dark mb-3">
+          <div class="card-header">Victorias</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ stats.wins or 0 }}</h5>
+            <p class="card-text">Número de partidas ganadas.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-bg-dark mb-3">
+          <div class="card-header">Ranking</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ stats.ranking or 'N/A' }}</h5>
+            <p class="card-text">Tu posición en el ranking general.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Progress bar de avance -->
+    <label class="form-label mt-3">Progreso hacia el siguiente nivel</label>
+    <div class="progress mb-4">
+      <div class="progress-bar bg-success" role="progressbar" style="width: {{ stats.progress or 40 }}%;" aria-valuenow="{{ stats.progress or 40 }}" aria-valuemin="0" aria-valuemax="100">
+        {{ stats.progress or 40 }}%
+      </div>
+    </div>
+  </div>
+  <!-- Mis Juegos -->
+  <div class="tab-pane fade" id="games" role="tabpanel">
+    <div class="row">
+      {% if games %}
+        {% for game in games %}
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card text-bg-secondary">
+              <div class="card-header">{{ game.name }}</div>
+              <div class="card-body">
+                <p class="card-text">Fecha: {{ game.date }}</p>
+                <p class="card-text">Resultado: {{ game.result }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <div class="alert alert-info">No tienes juegos registrados aún.</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

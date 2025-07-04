@@ -6,6 +6,12 @@
 
 - [X] **Agregar script `crea_db.py`** para crear la base de datos y tabla de usuarios.
 - [ ] ✍️ Documentar en `README.md` cómo ejecutar `crea_db.py`.
+- [ ] Crear tabla games (juegos de la competición)
+- [ ] Crear tabla matches o partidas (relaciona usuarios, juegos, resultados, nivel)
+- [ ] Añadir campo nivel (amateur, normal, expert) en la inscripción o partida
+- [ ] Definir y documentar la mecánica del torneo (puntos, tiempos, eliminaciones, etc.)
+- [ ] Registrar resultados de partidas/juegos 
+- [ ] Calcular y mostrar ranking general y por juego
 
 ---
 
@@ -32,7 +38,7 @@
 
 ## 🧑‍💻 Paneles de Usuario
 
-- [ ] 🧍‍♂️ Crear **Dashboard para usuarios registrados**:
+- [X] 🧍‍♂️ Crear **Dashboard para usuarios registrados**:
   - Vista de sus juegos o partidas
   - Estadísticas básicas
 - [ ] 👑 Crear **Dashboard para administrador**:

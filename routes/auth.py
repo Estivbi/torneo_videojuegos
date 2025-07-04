@@ -1,10 +1,20 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-from models import get_db
-
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from models import get_db, get_user_by_credentials
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        # Lógica para validar usuario
+        username = request.form['username']
+        password = request.form['password']
+        # validas el usuario aquí y obtienes su id
+        user = get_user_by_credentials(username, password)
+        if user:
+            session['user_id'] = user['id']
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Usuario o contraseña incorrectos')
     return render_template('login.html')
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -68,3 +78,8 @@ def register():
         username_valid=username_valid,
         password_valid=password_valid
     )
+
+@auth.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.login'))

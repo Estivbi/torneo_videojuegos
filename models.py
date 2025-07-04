@@ -35,3 +35,10 @@ def get_user(username):
 def get_user_by_email(email):
     db = get_db()
     return db.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+
+def get_user_by_credentials(username, password):
+    db = get_db()
+    user = db.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+    if user and user['password'] == password:
+        return user
+    return None
