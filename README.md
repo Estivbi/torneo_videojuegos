@@ -133,7 +133,13 @@ source .venv/bin/activate  # En Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Ejecutar la aplicación
+### 4. Crear las tablas de la base de datos (usuarios, juegos y partidas)
+
+```bash
+python crea_db.py
+``` 
+
+### 5. Ejecutar la aplicación
 
 ```bash
 python app.py

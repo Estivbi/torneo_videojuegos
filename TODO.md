@@ -5,14 +5,18 @@
 ## 📁 Base del Proyecto
 
 - [X] **Agregar script `crea_db.py`** para crear la base de datos y tabla de usuarios.
-- [ ] ✍️ Documentar en `README.md` cómo ejecutar `crea_db.py`.
-- [ ] Crear tabla games (juegos de la competición)
+- [X] ✍️ Documentar en `README.md` cómo ejecutar `crea_db.py`.
+- [X] Crear tabla games (juegos de la competición)
 - [ ] Crear tabla matches o partidas (relaciona usuarios, juegos, resultados, nivel)
-- [ ] Añadir campo nivel (amateur, normal, expert) en la inscripción o partida
+- [X] Añadir campo nivel (amateur, normal, expert) en la inscripción o partida
 - [ ] Definir y documentar la mecánica del torneo (puntos, tiempos, eliminaciones, etc.)
-- [ ] Registrar resultados de partidas/juegos 
-- [ ] Calcular y mostrar ranking general y por juego
-
+- [X] Registrar resultados de partidas/juegos 
+- [X] Calcular y mostrar ranking general y por juego
+- Para el modelo eliminación - ya veremos si lo hago: 
+  - Requiere lógica adicional:
+      Crear rondas, emparejamientos y marcar eliminados.
+      Guardar el estado de cada ronda y quién avanza.
+      
 ---
 
 ## 🔐 Autenticación y Seguridad
@@ -30,9 +34,9 @@
 
 ## 🔁 Flujo de Usuario
 
-- [ ] 🔄 Tras registrarse, **redirigir automáticamente al login**.
-- [ ] 🔓 Crear página de **login** con validaciones y sesiones.
-- [ ] 🚪 Implementar **logout**.
+- [X] 🔄 Tras registrarse, **redirigir automáticamente al login**.
+- [X] 🔓 Crear página de **login** con validaciones y sesiones.
+- [X] 🚪 Implementar **logout**.
 
 ---
 
@@ -54,4 +58,3 @@
 
 - [ ] ⚙️ Añadir sistema de roles (admin / user)
 - [ ] 📊 Implementar gráficas con estadísticas del torneo (ranking, puntuaciones, etc.)
-- [ ] 🌐 Añadir internacionalización si se requiere (opcional)

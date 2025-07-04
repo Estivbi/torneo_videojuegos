@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Registrar Partida{% endblock %}
+{% block content %}
+<h2>Registrar Partida</h2>
+<form method="post">
+    <div class="mb-3">
+        <label for="game_id" class="form-label">Juego</label>
+        <select name="game_id" id="game_id" class="form-select" required>
+            {% for juego in juegos %}
+            <option value="{{ juego.id }}">{{ juego.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="level" class="form-label">Nivel</label>
+        <select name="level" id="level" class="form-select" required>
+            <option value="amateur">Amateur</option>
+            <option value="normal">Normal</option>
+            <option value="expert">Expert</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="score" class="form-label">Puntuación</label>
+        <input type="number" name="score" id="score" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="time" class="form-label">Tiempo (segundos)</label>
+        <input type="number" name="time" id="time" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="result" class="form-label">Resultado</label>
+        <select name="result" id="result" class="form-select">
+            <option value="">Sin resultado</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Derrota">Derrota</option>
+            <option value="Empate">Empate</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gameSelect = document.getElementById('game_id');
+    const scoreInput = document.getElementById('score');
+    const timeInput = document.getElementById('time');
+
+    function updateFields() {
+        if (gameSelect.options[gameSelect.selectedIndex].text === 'Speed Run') {
+            timeInput.required = true;
+            scoreInput.required = false;
+            scoreInput.value = 0;
+            scoreInput.parentElement.style.display = 'none';
+            timeInput.parentElement.style.display = '';
+        } else if (gameSelect.options[gameSelect.selectedIndex].text === 'High Score') {
+            scoreInput.required = true;
+            timeInput.required = false;
+            timeInput.value = 0;
+            scoreInput.parentElement.style.display = '';
+            timeInput.parentElement.style.display = 'none';
+        }
+    }
+    gameSelect.addEventListener('change', updateFields);
+    updateFields();
+});
+</script>
+{% endblock %}
