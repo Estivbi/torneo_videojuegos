@@ -12,7 +12,11 @@ def login():
         user = get_user_by_credentials(username, password)
         if user:
             session['user_id'] = user['id']
-            return redirect(url_for('main.dashboard'))
+            session['role'] = user['role']
+            if user['role'] == 'admin':
+                return redirect(url_for('main.admin_panel'))
+            else:
+                return redirect(url_for('main.dashboard'))
         else:
             flash('Usuario o contraseña incorrectos')
     return render_template('login.html')

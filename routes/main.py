@@ -1,7 +1,138 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash
 from models import get_db
+from functools import wraps
 
 main = Blueprint('main', __name__)
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session or session.get('role') != 'admin':
+            return redirect(url_for('auth.login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@main.route('/admin')
+@admin_required
+def admin_panel():
+    return render_template('admin.html')
+
+@main.route('/admin/usuarios')
+@admin_required
+def admin_usuarios():
+    db = get_db()
+    usuarios = db.execute('SELECT * FROM users').fetchall()
+    return render_template('admin_usuarios.html', usuarios=usuarios)
+
+@main.route('/admin/juegos')
+@admin_required
+def admin_juegos():
+    db = get_db()
+    juegos = db.execute('SELECT * FROM games').fetchall()
+    return render_template('admin_juegos.html', juegos=juegos)
+
+# Crear juego
+@main.route('/admin/juegos/crear', methods=['GET', 'POST'])
+@admin_required
+def crear_juego():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        db = get_db()
+        db.execute('INSERT INTO games (name, description) VALUES (?, ?)', (nombre, descripcion))
+        db.commit()
+        flash('Juego creado correctamente.', 'success')
+        return redirect(url_for('main.admin_juegos'))
+    return render_template('crear_juego.html')
+
+# Editar juego
+@main.route('/admin/juegos/editar/<int:juego_id>', methods=['GET', 'POST'])
+@admin_required
+def editar_juego(juego_id):
+    db = get_db()
+    juego = db.execute('SELECT * FROM games WHERE id = ?', (juego_id,)).fetchone()
+    if not juego:
+        flash('Juego no encontrado.', 'danger')
+        return redirect(url_for('main.admin_juegos'))
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        db.execute('UPDATE games SET name = ?, description = ? WHERE id = ?', (nombre, descripcion, juego_id))
+        db.commit()
+        flash('Juego actualizado.', 'success')
+        return redirect(url_for('main.admin_juegos'))
+    return render_template('editar_juego.html', juego=juego)
+
+# Eliminar juego
+@main.route('/admin/juegos/eliminar/<int:juego_id>', methods=['POST'])
+@admin_required
+def eliminar_juego(juego_id):
+    db = get_db()
+    db.execute('DELETE FROM games WHERE id = ?', (juego_id,))
+    db.commit()
+    flash('Juego eliminado.', 'success')
+    return redirect(url_for('main.admin_juegos'))
+
+# Editar usuario
+@main.route('/admin/usuarios/editar/<int:user_id>', methods=['GET', 'POST'])
+@admin_required
+def editar_usuario(user_id):
+    db = get_db()
+    usuario = db.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
+    if not usuario:
+        flash('Usuario no encontrado.', 'danger')
+        return redirect(url_for('main.admin_usuarios'))
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        role = request.form['role']
+        db.execute('UPDATE users SET email = ?, username = ?, role = ? WHERE id = ?', (email, username, role, user_id))
+        db.commit()
+        flash('Usuario actualizado.', 'success')
+        return redirect(url_for('main.admin_usuarios'))
+    return render_template('editar_usuario.html', usuario=usuario)
+
+# Eliminar usuario
+@main.route('/admin/usuarios/eliminar/<int:user_id>', methods=['POST'])
+@admin_required
+def eliminar_usuario(user_id):
+    db = get_db()
+    db.execute('DELETE FROM users WHERE id = ?', (user_id,))
+    db.commit()
+    flash('Usuario eliminado.', 'success')
+    return redirect(url_for('main.admin_usuarios'))
+
+# Crear usuario
+@main.route('/admin/usuarios/crear', methods=['GET', 'POST'])
+@admin_required
+def crear_usuario():
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        role = request.form['role']
+
+        db = get_db()
+        # Verificar si el correo o el nombre de usuario ya existen
+        usuario_existente = db.execute(
+            'SELECT id FROM users WHERE email = ? OR username = ?',
+            (email, username)
+        ).fetchone()
+
+        if usuario_existente:
+            flash('El correo o el nombre de usuario ya están registrados.', 'danger')
+            return redirect(url_for('main.crear_usuario'))
+
+        # Insertar el nuevo usuario en la base de datos
+        db.execute(
+            'INSERT INTO users (email, username, password, role) VALUES (?, ?, ?, ?)',
+            (email, username, password, role)
+        )
+        db.commit()
+        flash('Usuario creado correctamente.', 'success')
+        return redirect(url_for('main.admin_usuarios'))
+
+    return render_template('crear_usuario.html')
 
 @main.route('/dashboard')
 def dashboard():
