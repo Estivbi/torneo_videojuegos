@@ -21,7 +21,14 @@ def admin_panel():
 @admin_required
 def admin_usuarios():
     db = get_db()
-    usuarios = db.execute('SELECT * FROM users').fetchall()
+    q = request.args.get('q', '').strip()
+    if q:
+        usuarios = db.execute(
+            "SELECT * FROM users WHERE username LIKE ? OR email LIKE ?",
+            (f"%{q}%", f"%{q}%")
+        ).fetchall()
+    else:
+        usuarios = db.execute('SELECT * FROM users').fetchall()
     return render_template('admin_usuarios.html', usuarios=usuarios)
 
 @main.route('/admin/juegos')

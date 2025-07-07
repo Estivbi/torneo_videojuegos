@@ -21,8 +21,8 @@
 
 ## 🔐 Autenticación y Seguridad
 
-- [ ] 🔑 Crear **panel de administrador** con un correo y contraseña predefinidos.
-- [ ] 🛡️ Proteger rutas para que solo el **admin** pueda acceder a ciertas páginas.
+- [X] 🔑 Crear **panel de administrador** con un correo y contraseña predefinidos.
+- [X] 🛡️ Proteger rutas para que solo el **admin** pueda acceder a ciertas páginas.
 - [ ] 🔐 Mejorar la **seguridad del registro de usuarios**:
   - Validación de email
   - Contraseñas seguras
@@ -45,12 +45,12 @@
 - [X] 🧍‍♂️ Crear **Dashboard para usuarios registrados**:
   - Vista de sus juegos o partidas
   - Estadísticas básicas
-- [ ] 👑 Crear **Dashboard para administrador**:
+- [X] 👑 Crear **Dashboard para administrador**:
   - [ ] 📋 Listar participantes
-  - [ ] ➕ Crear participantes
-  - [ ] ✏️ Editar participantes
-  - [ ] ❌ Eliminar participantes
-  - [ ] 🎮 Crear / editar / eliminar juegos
+  - [X] ➕ Crear participantes
+  - [X] ✏️ Editar participantes
+  - [X] ❌ Eliminar participantes
+  - [X] 🎮 Crear / editar / eliminar juegos
 
 ---
 
