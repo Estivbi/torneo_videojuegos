@@ -65,6 +65,55 @@
         </tbody>
       </table>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+{% if ranking_puntos_labels and ranking_puntos_labels|length > 0 %}
+<canvas id="highScoreChart" width="400" height="200" class="mb-5"></canvas>
+<script>
+  const ctx = document.getElementById('highScoreChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ ranking_puntos_labels|tojson }},
+      datasets: [{
+        label: 'Puntaje Máximo',
+        data: {{ ranking_puntos_data|tojson }},
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.7)',
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(153, 102, 255, 0.7)'
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+        barPercentage: 0.6,
+        categoryPercentage: 0.7
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: '#fff',
+          anchor: 'end',
+          align: 'start',
+          font: { weight: 'bold' }
+        }
+      },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+</script>
+{% endif %}
+
       <!-- Ranking por Tiempo -->
       <h3 class="mt-5">Ranking Speed Run</h3>
       <table class="table table-dark table-striped">
@@ -85,6 +134,53 @@
           {% endfor %}
         </tbody>
       </table>
+      {% if ranking_tiempo_labels and ranking_tiempo_labels|length > 0 %}
+<canvas id="speedRunChart" width="400" height="200" class="mb-5"></canvas>
+<script>
+  const ctxSpeed = document.getElementById('speedRunChart').getContext('2d');
+  new Chart(ctxSpeed, {
+    type: 'bar',
+    data: {
+      labels: {{ ranking_tiempo_labels|tojson }},
+      datasets: [{
+        label: 'Mejor Tiempo (segundos)',
+        data: {{ ranking_tiempo_data|tojson }},
+        backgroundColor: [
+          'rgba(255, 206, 86, 0.7)',
+          'rgba(255, 159, 64, 0.7)',
+          'rgba(255, 99, 132, 0.7)'
+        ],
+        borderColor: [
+          'rgba(255, 206, 86, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+        barPercentage: 0.6,
+        categoryPercentage: 0.7
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: '#222',
+          anchor: 'end',
+          align: 'start',
+          font: { weight: 'bold' }
+        }
+      },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+</script>
+{% endif %}
+
     <!-- Progress bar de avance -->
     <label class="form-label mt-3">Progreso hacia el siguiente nivel</label>
     <div class="progress mb-4">

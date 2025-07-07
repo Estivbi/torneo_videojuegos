@@ -193,13 +193,24 @@ def dashboard():
             'result': g['result'] or 'Sin resultado'
         })
 
+    # Datos para Chart.js
+    ranking_puntos_labels = [r['username'] for r in ranking_puntos]
+    ranking_puntos_data = [r['max_score'] for r in ranking_puntos]
+    ranking_tiempo_labels = [r['username'] for r in ranking_tiempo]
+    ranking_tiempo_data = [r['min_time'] for r in ranking_tiempo]
+
     return render_template(
         'dashboard.html',
         games=games,
         stats=stats,
         ranking_puntos=ranking_puntos,
-        ranking_tiempo=ranking_tiempo
+        ranking_tiempo=ranking_tiempo,
+        ranking_puntos_labels=ranking_puntos_labels,
+        ranking_puntos_data=ranking_puntos_data,
+        ranking_tiempo_labels=ranking_tiempo_labels,
+        ranking_tiempo_data=ranking_tiempo_data
     )
+
 @main.route('/')
 def index():
     return render_template('index.html')

@@ -46,7 +46,7 @@
   - Vista de sus juegos o partidas
   - Estadísticas básicas
 - [X] 👑 Crear **Dashboard para administrador**:
-  - [ ] 📋 Listar participantes
+  - [X] 📋 Listar participantes
   - [X] ➕ Crear participantes
   - [X] ✏️ Editar participantes
   - [X] ❌ Eliminar participantes
@@ -56,5 +56,5 @@
 
 ## 🛠️ Bonus
 
-- [ ] ⚙️ Añadir sistema de roles (admin / user)
-- [ ] 📊 Implementar gráficas con estadísticas del torneo (ranking, puntuaciones, etc.)
+- [X] ⚙️ Añadir sistema de roles (admin / user)
+- [X] 📊 Implementar gráficas con estadísticas del torneo (ranking, puntuaciones, etc.)
