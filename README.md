@@ -24,8 +24,9 @@ Curso: Proyecto Final Python - Propuesta C
 4. [Modelo de datos](#modelo-de-datos)  
 5. [Requisitos de la aplicación](#requisitos-de-la-aplicación)  
 6. [Manual de instalación](#manual-de-instalación)  
-7. [Conclusiones](#conclusiones)  
-8. [Evolutivos del proyecto](#evolutivos-del-proyecto)  
+7. [Panel de administración](#panel-de-administración)  
+8. [Conclusiones](#conclusiones)  
+9. [Evolutivos del proyecto](#evolutivos-del-proyecto)  
 
 ---
 
@@ -152,3 +153,17 @@ python crea_db.py
 ```bash
 python app.py
 ``` 
+### 🛠️ Panel de administración
+Para acceder al panel de administración:
+
+Ingresa a /login.
+
+Usa el siguiente usuario y contraseña de administrador:
+
+Usuario: admin
+
+Contraseña: 123456789
+
+Una vez dentro, podrás gestionar usuarios y juegos desde el panel.
+
+🔗 Ruta directa: /admin
