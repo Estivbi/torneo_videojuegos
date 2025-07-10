@@ -167,3 +167,14 @@ Contraseña: 123456789
 Una vez dentro, podrás gestionar usuarios y juegos desde el panel.
 
 🔗 Ruta directa: /admin
+
+---
+
+## 🚀 Despliegue en Render.com
+
+1. Asegúrate de que tu archivo `requirements.txt` incluya `gunicorn`.
+2. En Render, configura el **Start Command** así (si tu archivo principal es `app.py` y la variable Flask se llama `app`): gunicorn app:app
+3. No uses `python app.py` ni `flask run` en Render.
+4. Si cambiaste el nombre del archivo o la variable, ajusta el comando (`gunicorn archivo:variable`).
+
+Esto permitirá que tu aplicación Flask funcione correctamente en Render.
